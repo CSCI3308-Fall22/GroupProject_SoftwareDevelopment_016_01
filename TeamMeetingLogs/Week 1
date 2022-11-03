@@ -11,8 +11,60 @@ Finish Wire Frame (Page for each idea we want to implement)
 -login
 -calender
 -PR Leaderboard
-- Athlete Program page
+-Athlete Program page
 Finish Storyboards 
 -Break into smaller tasks
 
+
+
+
+Week 1, Meeting 11/1/2022 7:00pm
+
+-Final Ideas/ Pages
+
+Register
+-Username, Password
+-Link to login page
+
+Login (Default if not logged in) 
+-Username, Password 
+-Link to Register Page
+
+Logout Function
+-Destroy Session
+
+Calendar
+-One Week
+-(Athlete) view page only
+-Add event (Debugging) 
+-Delete Event (Debugging) 
+
+Athlete Program Page / Home 
+- View programs 
+- Leave Program option
+- Select Program and view routine
+- Delete Athlete and Logout (Debugging) 
+
+All Programs Page
+- Selectable programs that appear in Athlete's Program Page and makes an event on the calendar 
+- Make it impossible to sign up for the same program twice (isnt visable on the All Programs Page)
+- Have database with pre-loaded programs (at least 4) 
+
+Note: Program refferse to a team or organization, while routine refers to the work-out information. 
+
+Import Partials From Other Labs 
+
+
+Broke down Tasks into smaller Tasks on Story Board 
+- Next time we meet with Everyone, we will allocate Story points 
+
+On Thursday, We will assign work to be done for week 2 
+
+IF TIME
+- Additional options for the Coach account 
+   -add program creation
+   - add events to calendar 
+   - make passwords for created programs 
+- Indivdual Program Pages selectable from Athlete Program Page
+- Add PR leader board and link to it on Home/ Athlete Program Page 
 
