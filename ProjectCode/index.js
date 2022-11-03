@@ -42,9 +42,78 @@ app.listen(3000);
 console.log('Server is listening on port 3000');
 
 app.get('/', (req, res) => {
-    res.redirect('/home');
+    res.redirect('/login');
 });
 
-app.get('/home', (req, res) => {
-    res.render("pages/home.ejs");
+app.get('/programs', (req, res) => {
+    res.render("pages/programs.ejs");
+});
+
+app.get('/calender', (req, res) => {
+    res.render("pages/calender.ejs");
+});
+
+app.get('/joinprograms', (req, res) => {
+    res.render("pages/joinprograms.ejs");
+});
+
+app.get('/register', (req, res) => {
+    res.render('pages/register.ejs');
+});
+
+app.get('/login', (req, res) => {
+    res.render("pages/login.ejs");
+});
+
+app.post('/register', async (req, res) => {
+    const hash = await bcrypt.hash(req.body.password, 10);
+    const username = req.body.username;
+    db.any("INSERT INTO users(username, password) VALUES($1, $2)", [username, hash])
+        .then(() => {
+            res.redirect("/login");
+        })
+        .catch(() => {
+            res.redirect('/register')
+        });
+});
+
+
+app.post('/login', async (req, res) => {
+    db.any("SELECT * FROM users WHERE users.username = $1", [req.body.username])
+        .then(async (user) => {
+            const match = await bcrypt.compare(req.body.password, user[0].password);
+            if (!match) {
+                res.locals.message = "Incorrect password";
+                res.locals.error = "danger";
+                res.render("pages/login.ejs");
+            } else {
+                req.session.user = {
+                    api_key: process.env.API_KEY,
+                };
+                req.session.save();
+                res.redirect('/programs')
+            }
+        })
+        .catch(() => {
+            res.redirect('/register');
+        });
+});
+
+
+// Authentication Middleware.
+const auth = (req, res, next) => {
+    if (!req.session.user) {
+        // Default to register page.
+        return res.redirect('/register');
+    }
+    next();
+};
+
+// Authentication Required
+app.use(auth);
+
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.locals.message = "Logged out Successfully";
+    res.render('pages/login.ejs');
 });

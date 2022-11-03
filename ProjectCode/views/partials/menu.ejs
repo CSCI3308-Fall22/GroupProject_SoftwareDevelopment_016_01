@@ -1,24 +1,27 @@
 <header>
-    <nav class="navbar navbar-expand-sm border-bottom">
-        <div class="container">
-            <button
-                    class="navbar-toggler ms-auto"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbar-collapse"
-                    aria-controls="navbar"
-                    aria-expanded="false"
+    <nav class="navbar navbar-expand-sm border-bottom navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbar-collapse" aria-controls="navbar" aria-expanded="false"
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
+            <div class="collapse navbar-collapse " id="navbar-collapse">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a href = "/" class = "nav-link">WeFit!</a>
+                        <a href="/" class="nav-link">Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/calender" class="nav-link">Calender</a>
                     </li>
                 </ul>
-                <div class="nav-item me-1">
-                    <a href = "/logout" class = "nav-link">Logout</a>
+                <div class="nav-item">
+                    <% if(typeof data != "undefined"){ %>
+                        <a href="/joinprograms" class="nav-link">Join Programs</a>
+                    <% } %>
+                </div>
+                <div class="nav-item">
+                    <a href="/logout" class="nav-link">Logout</a>
                 </div>
             </div>
         </div>
