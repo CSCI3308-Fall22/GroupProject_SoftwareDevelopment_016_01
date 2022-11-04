@@ -45,18 +45,6 @@ app.get('/', (req, res) => {
     res.redirect('/login');
 });
 
-app.get('/programs', (req, res) => {
-    res.render("pages/programs.ejs");
-});
-
-app.get('/calender', (req, res) => {
-    res.render("pages/calender.ejs");
-});
-
-app.get('/joinprograms', (req, res) => {
-    res.render("pages/joinprograms.ejs");
-});
-
 app.get('/register', (req, res) => {
     res.render('pages/register.ejs');
 });
@@ -77,7 +65,6 @@ app.post('/register', async (req, res) => {
         });
 });
 
-
 app.post('/login', async (req, res) => {
     db.any("SELECT * FROM users WHERE users.username = $1", [req.body.username])
         .then(async (user) => {
@@ -95,10 +82,11 @@ app.post('/login', async (req, res) => {
             }
         })
         .catch(() => {
-            res.redirect('/register');
+            res.locals.message = "Username Not Found";
+            res.locals.error = "danger";
+            res.render("pages/login.ejs");
         });
 });
-
 
 // Authentication Middleware.
 const auth = (req, res, next) => {
@@ -116,4 +104,16 @@ app.get('/logout', (req, res) => {
     req.session.destroy();
     res.locals.message = "Logged out Successfully";
     res.render('pages/login.ejs');
+});
+
+app.get('/programs', (req, res) => {
+    res.render("pages/programs.ejs");
+});
+
+app.get('/calender', (req, res) => {
+    res.render("pages/calender.ejs");
+});
+
+app.get('/joinprograms', (req, res) => {
+    res.render("pages/joinprograms.ejs");
 });

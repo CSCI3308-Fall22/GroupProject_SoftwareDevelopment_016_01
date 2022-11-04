@@ -1,6 +1,6 @@
 <% if (locals.message) { %>
-    <div
-            class="alert alert-<%- locals.error ? 'danger' : 'success' %>"
+    <div style="margin:0"
+            class="alert alert-<%- locals.error ? 'danger' : 'success' %> alert-dismissible fade show"
             role="alert">
         <%= message %>
     </div>
