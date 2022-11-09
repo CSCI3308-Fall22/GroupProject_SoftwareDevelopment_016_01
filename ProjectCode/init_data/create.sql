@@ -29,3 +29,6 @@ CREATE TABLE events(
     description VARCHAR(1000)
 );
 
+
+
+INSERT INTO users (username, password) VALUES ("TestUser1", "TestPassword1"),("TestUser2", "TestPassword2");
