@@ -16,3 +16,5 @@ CREATE TABLE usersToPrograms(
     username VARCHAR(50),
     program_id CHAR(60)
 );
+
+INSERT INTO users (username, password) VALUES ("TestUser1", "TestPassword1"),("TestUser2", "TestPassword2");
