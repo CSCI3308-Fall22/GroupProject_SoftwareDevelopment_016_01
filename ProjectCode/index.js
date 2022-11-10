@@ -76,7 +76,7 @@ app.post('/login', async (req, res) => {
                 res.render("pages/login.ejs");
             } else {
                 req.session.user = {
-                    api_key: process.env.API_KEY,
+                    username: req.body.username,
                 };
                 req.session.save();
                 res.redirect('/programs')
@@ -108,7 +108,14 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/programs', (req, res) => {
-    res.render("pages/programs.ejs");
+    const username_ = req.session.user.username;
+    db.any("SELECT * FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_] )
+        .then((data) => {
+            res.render("pages/joinprograms.ejs", {data:data})
+        })
+        .catch((err) => {
+            console.log(err)
+        });
 });
 
 app.get('/calendar', (req, res) => {
@@ -116,5 +123,14 @@ app.get('/calendar', (req, res) => {
 });
 
 app.get('/joinprograms', (req, res) => {
-    res.render("pages/joinprograms.ejs");
+    const username_ = req.session.user.username;
+    db.any("SELECT * FROM programs EXCEPT SELECT programs.program_id, program_name, password, owner_name FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_])
+        .then((data) => {
+            console.log(data)
+            res.render("pages/joinprograms.ejs", {data:data})
+        })
+        .catch((err) => {
+            console.log(err)
+        });
 });
+
