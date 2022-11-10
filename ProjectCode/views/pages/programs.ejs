@@ -3,6 +3,52 @@
 
 <main>
     <div class="container">
+        <table class="table">
+            <thead>
+              <% if (locals.message) { %>
+                <div
+                  class="alert alert-<%- locals.error ? 'danger' : 'success' %>"
+                  role="alert"
+                >
+                  <%= message %>
+                </div>
+                <% } %>
+            
+              <% usersToPrograms.forEach(username => { %> 
+                <div class="card text-center">
+                    <div class="card-header">
+                        <%= programs.program_name %>
+                        <%= programs.owner_name %>
+                    </div>
+                    <div class="card-body">
+                      
+                      <p class="card-text">Picture goes here!</p>
+                      
+                    </div>
+                    <div class="card-footer text-muted">
+                        <% if (locals.action =="delete") { %>
+                            <form method = "post" action ="/courses/delete">
+                              <input type = "hidden" name = "program_id" value = "<%= program.program_id %>" />
+                              <button type = "submit" class ="btn btn-sm btn-outline-danger" >Leave</button>
+                            </form>
+
+                    </div>
+                  </div>
+                
+                
+                  
+                            
+    
+                            <% } %>
+                          
+                      </form>
+                    <% } %>
+                    
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+            </table>
     </div>
 </main>
 
