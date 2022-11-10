@@ -53,6 +53,7 @@ app.get('/login', (req, res) => {
     res.render("pages/login.ejs");
 });
 
+
 app.post('/register', async (req, res) => {
     const hash = await bcrypt.hash(req.body.password, 10);
     const username = req.body.username;
@@ -110,8 +111,8 @@ app.get('/programs', (req, res) => {
     res.render("pages/programs.ejs");
 });
 
-app.get('/calender', (req, res) => {
-    res.render("pages/calender.ejs");
+app.get('/calendar', (req, res) => {
+    res.render("pages/calendar.ejs");
 });
 
 app.get('/joinprograms', (req, res) => {
