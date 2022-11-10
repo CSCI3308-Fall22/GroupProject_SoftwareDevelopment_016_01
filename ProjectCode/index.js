@@ -122,7 +122,7 @@ app.get('/joinprograms', (req, res) => {
     const username_ = req.session.user.username;
     db.any("SELECT * FROM programs EXCEPT SELECT programs.program_id, program_name, password, owner_name FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_])
         .then((data) => {
-            console.log(data)
+            console.log("Join programs",data)
             res.render("pages/joinprograms.ejs", {data:data})
         })
         .catch((err) => {
@@ -141,4 +141,19 @@ app.get('/calendar', (req, res) => {
             console.log(err)
         });
 });
+
+app.post('/joinprogram', (req, res) => {
+    console.log("Join programs join")
+    const program_id = req.body.program_id;
+    const username_ = req.session.user.username;
+    db.any("INSERT INTO usersToPrograms (username, program_id) VALUES ($1, $2)", [username_,program_id])
+        .then((data) => {
+            console.log("Join programs join",data)
+            res.redirect("/joinprograms")
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+});
+
 
