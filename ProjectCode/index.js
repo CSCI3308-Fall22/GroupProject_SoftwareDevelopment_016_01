@@ -118,16 +118,24 @@ app.get('/programs', (req, res) => {
         });
 });
 
-app.get('/calendar', (req, res) => {
-    res.render("pages/calendar.ejs");
-});
-
 app.get('/joinprograms', (req, res) => {
     const username_ = req.session.user.username;
     db.any("SELECT * FROM programs EXCEPT SELECT programs.program_id, program_name, password, owner_name FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_])
         .then((data) => {
             console.log(data)
             res.render("pages/joinprograms.ejs", {data:data})
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+});
+
+app.get('/calendar', (req, res) => {
+    const username_ = req.session.user.username;
+    db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id", [username_])
+        .then((data) => {
+            console.log(data)
+            res.render("pages/calendar.ejs", {data:data})
         })
         .catch((err) => {
             console.log(err)
