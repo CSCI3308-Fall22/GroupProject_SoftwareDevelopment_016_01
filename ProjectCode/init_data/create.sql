@@ -8,7 +8,7 @@ CREATE TABLE users
 DROP TABLE IF EXISTS programs CASCADE;
 CREATE TABLE programs
 (
-    program_id   VARCHAR(50) PRIMARY KEY,
+    program_id   SERIAL PRIMARY KEY NOT NULL,
     program_name VARCHAR(100),
     password     CHAR(60),
     owner_name   VARCHAR(75)
@@ -17,8 +17,10 @@ CREATE TABLE programs
 DROP TABLE IF EXISTS usersToPrograms CASCADE;
 CREATE TABLE usersToPrograms
 (
-    username   VARCHAR(50),
-    program_id CHAR(60)
+    username VARCHAR(50) NOT NULL,
+    program_id   INT NOT NULL,
+    FOREIGN KEY (username) REFERENCES users (username),
+    FOREIGN KEY (program_id) REFERENCES programs (program_id)
 );
 
 CREATE TYPE day AS ENUM ('sunday', 'monday', 'tuesday', 'thursday', 'friday', 'saturday');
@@ -26,13 +28,14 @@ CREATE TYPE day AS ENUM ('sunday', 'monday', 'tuesday', 'thursday', 'friday', 's
 DROP TABLE IF EXISTS events CASCADE;
 CREATE TABLE events
 (
-    event_id     VARCHAR(50) PRIMARY KEY,
-    program_id   CHAR(60),
+    event_id     SERIAL PRIMARY KEY NOT NULL,
+    program_id   INT,
     title        VARCHAR(100),
-    day day,
+    day          day,
     time         time,
     duration_min int,
-    description  VARCHAR(1000)
+    description  VARCHAR(1000),
+    FOREIGN KEY (program_id) REFERENCES programs (program_id)
 );
 
 
