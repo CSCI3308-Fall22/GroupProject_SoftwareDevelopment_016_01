@@ -111,7 +111,7 @@ app.get('/programs', (req, res) => {
     const username_ = req.session.user.username;
     db.any("SELECT * FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_] )
         .then((data) => {
-            res.render("pages/joinprograms.ejs", {data:data})
+            res.render("pages/programs.ejs", {data:data})
         })
         .catch((err) => {
             console.log(err)
