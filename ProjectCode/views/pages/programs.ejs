@@ -3,33 +3,48 @@
 <%- include ('../partials/menu') %>
 
 <main>
-    <div class="container">
-        <div class="row">
-              <% data.forEach(programs => { %>      
-                <div class="container">
-                <div class="card w-50 ">
-                    <div class="card-header">
-                        <%= programs.program_name %>
-                        <a>--------------------------------------------</a>
-                        <%= programs.owner_name %>
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text">Picture goes here!</p>
-                    </div>
 
-                    <div class="card-footer">
-                            
-                            <form method = "delete" action ="/programs/Leave">
-                              <input type = "hidden" name = "program_id" value = "<%= programs.program_id %>" />
-                              <button type = "submit" class ="btn btn-sm btn-outline-danger" >Leave</button>
-                            </form>
-                        
+    <% if(data.length === 0){ %>
+        <h3 class="text-center display-6">You are not currently enrolled in any programs</h3>
+    <% }else{ %>
+        <div class="container ">
+            <h1 class="display-6">Your Programs</h1>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <% data.forEach(programs => { %>
+                    <div class="col " style="transform: rotate(0);">
+                        <div class="card">
+                            <a style="margin:0" method="get" action="/programs/card" class="stretched-link"></a>
+                            <input type="hidden" name="program_id" value="<%= programs.program_id %>"/>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col"><h5 class="card-title"><%= programs.program_name %></h5>
+                                    </div>
+                                    <div class="col"><p class="card-text text-end"><%= programs.owner_name %></p>
+                                    </div>
+                                </div>
+                                <p style="margin:0"><%= programs.description %></p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col"><p class="card-text"><%= programs.year %></div>
+                                    <div class="col">
+                                        <div class="d-flex justify-content-end">
+                                            <form style="margin:0" method="delete" action="/programs/Leave">
+                                                <input type="hidden" name="program_id"
+                                                       value="<%= programs.program_id %>"/>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Leave
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  </div>
                 <% }); %>
-    </div>
-    </div>
+            </div>
+        </div>
+    <% } %>
 </main>
 
 <%- include ('../partials/footer') %>

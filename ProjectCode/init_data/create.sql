@@ -11,14 +11,16 @@ CREATE TABLE programs
     program_id   SERIAL PRIMARY KEY NOT NULL,
     program_name VARCHAR(100),
     password     CHAR(60),
-    owner_name   VARCHAR(75)
+    owner_name   VARCHAR(75),
+    description  VARCHAR(1000),
+    year         smallint
 );
 
 DROP TABLE IF EXISTS usersToPrograms CASCADE;
 CREATE TABLE usersToPrograms
 (
-    username VARCHAR(50) NOT NULL,
-    program_id   INT NOT NULL,
+    username   VARCHAR(50) NOT NULL,
+    program_id INT         NOT NULL,
     FOREIGN KEY (username) REFERENCES users (username),
     FOREIGN KEY (program_id) REFERENCES programs (program_id)
 );
@@ -31,7 +33,7 @@ CREATE TABLE events
     event_id     SERIAL PRIMARY KEY NOT NULL,
     program_id   INT,
     title        VARCHAR(100),
-    day          day,
+    day day,
     time         time,
     duration_min int,
     description  VARCHAR(1000),
@@ -47,10 +49,13 @@ VALUES ('TestUser1', '$2b$10$2FPeavnxF81f5pnDUkdq7OID7ANcWzC2VugYSECWvcCNaf184rW
 -- TestPassword1, TestPassword2
 
 --programs
-INSERT INTO programs (program_id, program_name, password, owner_name)
-VALUES (1, 'Fall Broomball 2022', '', 'owner1'),
-       (2, 'var soccer 2022', 'pass2', 'owner2'),
-       (3, 'football i guess', '', 'owner3');
+INSERT INTO programs (program_id, program_name, password, owner_name, year, description)
+VALUES (1, 'Fall Broomball', '', 'owner1', 2022,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non consectetur a erat nam. Quam lacus suspendisse faucibus interdum posuere. Blandit libero volutpat sed cras ornare arcu. Duis at consectetur lorem donec massa sapien. Leo urna molestie at elementum eu facilisis sed. Nulla porttitor massa id neque aliquam. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Ultricies mi eget mauris pharetra et ultrices neque. Congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Scelerisque fermentum dui faucibus in. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Non tellus orci ac auctor augue mauris. Id donec ultrices tincidunt arcu non. Lectus nulla at volutpat diam ut venenatis tellus in. Mollis nunc sed id semper risus in.'),
+       (2, 'var soccer', 'pass2', 'owner2', 2022,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non consectetur a erat nam. Quam lacus suspendisse faucibus interdum posuere. Blandit libero volutpat sed cras ornare arcu. Duis at consectetur lorem donec massa sapien. Leo urna molestie at elementum eu facilisis sed. Nulla porttitor massa id neque aliquam. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Ultricies mi eget mauris pharetra et ultrices neque. Congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Scelerisque fermentum dui faucibus in. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Non tellus orci ac auctor augue mauris. Id donec ultrices tincidunt arcu non. Lectus nulla at volutpat diam ut venenatis tellus in. Mollis nunc sed id semper risus in.'),
+       (3, 'football i guess', '', 'owner3', 2022,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non consectetur a erat nam. Quam lacus suspendisse faucibus interdum posuere. Blandit libero volutpat sed cras ornare arcu. Duis at consectetur lorem donec massa sapien. Leo urna molestie at elementum eu facilisis sed. Nulla porttitor massa id neque aliquam. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Ultricies mi eget mauris pharetra et ultrices neque. Congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Scelerisque fermentum dui faucibus in. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Non tellus orci ac auctor augue mauris. Id donec ultrices tincidunt arcu non. Lectus nulla at volutpat diam ut venenatis tellus in. Mollis nunc sed id semper risus in');
 
 --usersToPrograms
 INSERT INTO usersToPrograms (username, program_id)
