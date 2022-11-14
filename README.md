@@ -10,3 +10,9 @@ William “Joey” Weber wiwe4856@colorado.edu
 Andrew Carpender mica1528@colorado.edu
 Arnav Jain arja3862@colorado.edu
 Matt O'Leary maol7318@colorado.edu
+
+
+11/14/2022
+-The login, register, and programs pages have been rendered
+-The join pages work however the leave button is under development
+-The calendar page is in beta and will be ready by next release
