@@ -132,18 +132,6 @@ app.get('/joinprograms', (req, res) => {
         });
 });
 
-app.get('/calendar', (req, res) => {
-    const username_ = req.session.user.username;
-    db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id", [username_])
-        .then((data) => {
-            console.log(data)
-            res.render("pages/calendar.ejs", {data:data})
-        })
-        .catch((err) => {
-            console.log(err)
-        });
-});
-
 app.post('/joinprogram', (req, res) => {
     const program_id = req.body.program_id;
     const username_ = req.session.user.username;
@@ -151,6 +139,30 @@ app.post('/joinprogram', (req, res) => {
         .then((data) => {
             console.log("Join programs join",data)
             res.redirect("/joinprograms")
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+});
+
+app.get('/calendar', (req, res) => {
+    const username_ = req.session.user.username;
+    db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id ORDER BY events.time", [username_])
+        .then((data) => {
+            console.log("calender",data)
+            res.render("pages/calendar.ejs", {data:data})
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+});
+
+app.delete('/leave', (req, res) => {
+    const username_ = req.session.user.username;
+    db.any("DELETE FROM usersToPrograms WHERE usersToPrograms.username = $1 AND usersToPrograms.program_id = $2", [username_,req.body.program_id])
+        .then(() => {
+            console.log("leave",)
+            res.redirect("/programs")
         })
         .catch((err) => {
             console.log(err)

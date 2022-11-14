@@ -7,7 +7,7 @@
     <% if(data.length === 0){ %>
         <h3 class="text-center display-6">You are not currently enrolled in any programs</h3>
     <% }else{ %>
-        <div class="container ">
+        <div class="container">
             <h1 class="display-6">Your Programs</h1>
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <% data.forEach(programs => { %>
@@ -29,7 +29,7 @@
                                     <div class="col"><p class="card-text"><%= programs.year %></div>
                                     <div class="col">
                                         <div class="d-flex justify-content-end">
-                                            <form style="margin:0" method="delete" action="/programs/Leave">
+                                            <form style="margin:0" method="delete" action="/leave">
                                                 <input type="hidden" name="program_id"
                                                        value="<%= programs.program_id %>"/>
                                                 <button type="submit" class="btn btn-sm btn-outline-danger">Leave

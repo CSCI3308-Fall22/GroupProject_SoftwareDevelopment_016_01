@@ -25,7 +25,7 @@ CREATE TABLE usersToPrograms
     FOREIGN KEY (program_id) REFERENCES programs (program_id)
 );
 
-CREATE TYPE day AS ENUM ('sunday', 'monday', 'tuesday', 'thursday', 'friday', 'saturday');
+CREATE TYPE day AS ENUM ('Sunday', 'Monday', 'Tuesday', 'Thursday', 'Friday', 'Saturday');
 
 DROP TABLE IF EXISTS events CASCADE;
 CREATE TABLE events
@@ -66,4 +66,6 @@ VALUES ('TestUser1', 1),
 
 --events
 INSERT INTO events (event_id, program_id, title, "day", "time", description)
-VALUES (1, 1, 'Game', 'tuesday', '01:50', 'Be there 15 minutes early. CU rec-center ice rink');
+VALUES (1, 1, 'Game', 'Tuesday', '04:50', 'Be there 15 minutes early. CU rec-center ice rink'),
+       (2, 2, 'Game2', 'Tuesday', '02:50', 'Be there 15 minutes early. CU rec-center ice rink'),
+    (3, 3, 'Game3', 'Friday', '03:50', 'Be there 15 minutes early. CU rec-center ice rink');
