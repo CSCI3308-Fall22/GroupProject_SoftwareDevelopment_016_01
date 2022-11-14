@@ -11,6 +11,7 @@ Andrew Carpender mica1528@colorado.edu
 Arnav Jain arja3862@colorado.edu
 Matt O'Leary maol7318@colorado.edu
 
+Release Notes:
 
 11/14/2022
 -The login, register, and programs pages have been rendered
