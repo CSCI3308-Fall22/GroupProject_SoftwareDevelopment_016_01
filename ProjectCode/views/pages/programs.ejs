@@ -13,9 +13,9 @@
                 <% data.forEach(programs => { %>
                     <div class="col " style="transform: rotate(0);">
                         <div class="card">
-                            <a style="margin:0" method="get" action="/programs/card" class="stretched-link"></a>
-                            <input type="hidden" name="program_id" value="<%= programs.program_id %>"/>
                             <div class="card-body">
+                                <a href="/programcard"><span class="link" style=" position: absolute; width: 100%; height: calc(100% - 48px); top: 0; left: 0; z-index: 1;"></span></a>
+                                <input type="hidden" name="program_id" value="<%= programs.program_id %>"/>
                                 <div class="row">
                                     <div class="col"><h5 class="card-title"><%= programs.program_name %></h5>
                                     </div>

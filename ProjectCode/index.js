@@ -29,6 +29,7 @@ db.connect()
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/'));
 
 app.use(session({
     secret: process.env.SESSION_SECRET, saveUninitialized: false, resave: false,
