@@ -63,6 +63,7 @@ app.post('/register', async (req, res) => {
             res.redirect("/login");
         })
         .catch(() => {
+            res.locals.message = "Username already exists or is invalid type.";
             res.redirect('/register')
         });
 });
