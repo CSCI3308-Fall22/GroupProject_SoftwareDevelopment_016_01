@@ -51,11 +51,11 @@ VALUES ('TestUser1', '$2b$10$2FPeavnxF81f5pnDUkdq7OID7ANcWzC2VugYSECWvcCNaf184rW
 --programs
 INSERT INTO programs (program_id, program_name, password, owner_name, year, description)
 VALUES (1, 'Fall Broomball', '', 'owner1', 2022,
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non consectetur a erat nam. Quam lacus suspendisse faucibus interdum posuere. Blandit libero volutpat sed cras ornare arcu. Duis at consectetur lorem donec massa sapien. Leo urna molestie at elementum eu facilisis sed. Nulla porttitor massa id neque aliquam. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Ultricies mi eget mauris pharetra et ultrices neque. Congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Scelerisque fermentum dui faucibus in. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Non tellus orci ac auctor augue mauris. Id donec ultrices tincidunt arcu non. Lectus nulla at volutpat diam ut venenatis tellus in. Mollis nunc sed id semper risus in.'),
-       (2, 'var soccer', 'pass2', 'owner2', 2022,
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non consectetur a erat nam. Quam lacus suspendisse faucibus interdum posuere. Blandit libero volutpat sed cras ornare arcu. Duis at consectetur lorem donec massa sapien. Leo urna molestie at elementum eu facilisis sed. Nulla porttitor massa id neque aliquam. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Ultricies mi eget mauris pharetra et ultrices neque. Congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Scelerisque fermentum dui faucibus in. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Non tellus orci ac auctor augue mauris. Id donec ultrices tincidunt arcu non. Lectus nulla at volutpat diam ut venenatis tellus in. Mollis nunc sed id semper risus in.'),
-       (3, 'football i guess', '', 'owner3', 2022,
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non consectetur a erat nam. Quam lacus suspendisse faucibus interdum posuere. Blandit libero volutpat sed cras ornare arcu. Duis at consectetur lorem donec massa sapien. Leo urna molestie at elementum eu facilisis sed. Nulla porttitor massa id neque aliquam. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Ultricies mi eget mauris pharetra et ultrices neque. Congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Scelerisque fermentum dui faucibus in. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Non tellus orci ac auctor augue mauris. Id donec ultrices tincidunt arcu non. Lectus nulla at volutpat diam ut venenatis tellus in. Mollis nunc sed id semper risus in');
+        'This Fall, join the CU Rec Center on the ice for a competitive but fun season of Broomball! Grab your broom and your skates, we will provide the ice! Bring your BuffOne and a registered team every Thursday night otside the Ice Arena and follow this program for the scheduled workouts. See the Associates at the front desk for details and any questions. See you soon!'),
+       (2, 'Varsity Soccer', 'pass2', 'owner2', 2022,
+        'Grab your cleats and jerseys because this fall, CU Rec Center is offering a varsity soccer training program through WeFit! Click the link to join the program and recieve uptates on the calendar with workout plans and meeting times. See you soon!'),
+       (3, 'Indoor Soccer', '', 'owner3', 2022,
+        'Looking to condition before the next season? Joing the Fall Indoor Soccer program to stay fit with WeFit! Programs are posted here for workouts and meting times. These are intense but fun and sponsored by the CU Personal Trainers office!');
 
 --usersToPrograms
 INSERT INTO usersToPrograms (username, program_id)
@@ -66,4 +66,6 @@ VALUES ('TestUser1', 1),
 
 --events
 INSERT INTO events (event_id, program_id, title, "day", "time", description)
-VALUES (1, 1, 'Game', 'tuesday', '01:50', 'Be there 15 minutes early. CU rec-center ice rink');
+VALUES (1, 1, 'Game', 'tuesday', '01:50', 'Be there 15 minutes early. CU rec-center ice rink'),
+(2, 2, 'Practice', 'monday', '12:30', 'Bring cleats and a water bottle for the sprint workshop. Meet by the indoor arena. '),
+(3, 3, '3 V 3 Tournament', 'tuesday', '3:00', 'Bring cleats and a water bottle. Form teams of three outside the indoor arena while warming up');
