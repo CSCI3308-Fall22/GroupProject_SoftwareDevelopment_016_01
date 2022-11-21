@@ -60,10 +60,16 @@ app.post('/register', async (req, res) => {
     const username = req.body.username;
     db.any("INSERT INTO users(username, password) VALUES($1, $2)", [username, hash])
         .then(() => {
+            res.locals.message = "Username Added to System!";
+            res.locals.error = "success";
             res.redirect("/login");
         })
         .catch(() => {
-            res.redirect('/register')
+            res.locals.message = "Username already exists or is invalid type.";
+            res.locals.error = "danger";
+            res.render("pages/register.ejs");
+            //res.redirect('/register')
+            
         });
 });
 
