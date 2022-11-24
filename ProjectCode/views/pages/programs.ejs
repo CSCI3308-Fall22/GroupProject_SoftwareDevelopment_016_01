@@ -12,19 +12,19 @@
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <% data.forEach(programs => { %>
                     <div class="col " style="transform: rotate(0);">
-                        <div class="card">
-                            <div class="card-body">
+                        <div class="card h-100 w-100" style="padding:0; color: white;">
+                            <div class="card-body m-4" style = "padding:0; text-align:justify;">
                                 <a href="/programcard"><span class="link" style=" position: absolute; width: 100%; height: calc(100% - 48px); top: 0; left: 0; z-index: 1;"></span></a>
-                                <input type="hidden" name="program_id" value="<%= programs.program_id %>"/>
+                                <input type="hidden" name="program_id" value="<%= programs.program_id %>"/> 
                                 <div class="row">
-                                    <div class="col"><h5 class="card-title"><%= programs.program_name %></h5>
+                                    <div class="col"><h5 class="card-title" style="align-items:baseline;"><%= programs.program_name %></h5>
                                     </div>
                                     <div class="col"><p class="card-text text-end"><%= programs.owner_name %></p>
                                     </div>
                                 </div>
                                 <p style="margin:0"><%= programs.description %></p>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer w-100" style="align-items:stretch">
                                 <div class="row">
                                     <div class="col"><p class="card-text"><%= programs.year %></div>
                                     <div class="col">
@@ -32,7 +32,7 @@
                                             <form style="margin:0" method="delete" action="/programs/Leave">
                                                 <input type="hidden" name="program_id"
                                                        value="<%= programs.program_id %>"/>
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">Leave
+                                                <button type="submit" class="btn btn-sm btn-danger">Leave
                                                 </button>
                                             </form>
                                         </div>
