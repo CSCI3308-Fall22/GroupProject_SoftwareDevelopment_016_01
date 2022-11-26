@@ -143,7 +143,7 @@ app.get('/calendar', (req, res) => {
     db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id", [username_])
         .then((data) => {
             console.log(data)
-            res.render("pages/calendar2.ejs", {data:data})
+            res.render("pages/calendar.ejs", {data:data})
         })
         .catch((err) => {
             console.log(err)
