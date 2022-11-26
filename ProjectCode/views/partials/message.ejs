@@ -1,7 +1,15 @@
 <% if (locals.message) { %>
+    <% if (locals.error) { %>
     <div style="margin:0"
             class="alert alert-<%- locals.error ? 'danger' : 'success' %> alert-dismissible fade show"
             role="alert">
         <%= message %>
     </div>
+    <% } else { %>
+    <div style="margin:0"
+            class="alert alert-<%- locals.success ? 'success' : 'danger' %> alert-dismissible fade show"
+            role="alert">
+        <%= message %>
+    </div>
+    <% } %>
 <% } %>

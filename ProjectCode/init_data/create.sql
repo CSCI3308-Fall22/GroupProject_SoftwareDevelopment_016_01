@@ -40,6 +40,14 @@ CREATE TABLE events
     FOREIGN KEY (program_id) REFERENCES programs (program_id)
 );
 
+DROP TABLE IF EXISTS PRtable CASCADE;
+CREATE TABLE PRtable
+(
+    username VARCHAR(50) NOT NULL,
+    weightRecord INT,
+    runRecord INT,
+    FOREIGN KEY (username) REFERENCES users (username)
+);
 
 -- Test Data --
 --Users

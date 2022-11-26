@@ -156,11 +156,19 @@
         <li>
             <a href="/calendar">Calender</a>
         </li>
+        <li>
+            <a href="/leaderboard">Leaderboard</a>
+        </li>
     </ul>
     <ul>
         <li>
             <% if(typeof data != "undefined"){ %>
-                <a href="/joinprograms" class="nav-link">Join Programs</a>
+                <a href="/joinprograms">Join Programs</a>
+            <% } %>
+        </li>
+        <li>
+            <% if(typeof data != "undefined"){ %>
+                <a href="/records">PR</a>
             <% } %>
         </li>
         <li>
