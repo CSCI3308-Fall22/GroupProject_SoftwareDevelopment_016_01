@@ -2,6 +2,20 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menu') %>
 
+<style>
+    .center#rectangle {
+        background-color: #77bd28;
+        margin:auto;
+        border-radius: 10px;
+        color: white;
+    }
+    .container-fluid#rectangle {
+        background-color:#77bd28;
+        border-radius: 10px;
+        color: white
+    }
+</style>
+
 <body>
     <main>
         <div class = "container-fluid">
@@ -12,13 +26,14 @@
                 </div>
                 <br><br>
                 <div class = "container-fluid">
+
                     <div class = "row-auto" style="display:flex; justify-content: center;">
                     <div style="padding-bottom:10px">
-                    <div class = "card" style = "border-radius: 50%; padding-top:20px; max-height: 87%;max-width: 50%;">
-                        <div class = "card-body" style = "background-color: white; height:100%;width:100%; border-radius: 50%; display: inline-block; padding-bottom:20%">
-                            <div class = "text" style = "padding-top: 20%;">
-                                Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld
-                        </div>
+                    <div class = "card" style = "border-radius: 50%; height:87%; width:50%;max-width:50%">
+                        <div class = "card-body" style = "background-color: white; height:100%;width:100%; border-radius: 50%; display: inline-block; align-items: center; margin:20px">
+                            <div class = "text">
+                                Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?aklsndklasndklaslksakldsamkldmaskdaskldaskldmask;dmas;dmaskfdma;skldmas;dm
+                            </div>
                         </div>
                         <div class = "card-footer border-0" style = "background-color:rgba(255, 255, 255, 0);  display: inline-block;">
                             <img src = "https://images2.imgbox.com/5a/bd/Q4KNJ5wq_o.png" alt = "you are number 1" style = "height:40px; width:40px;">
@@ -30,11 +45,11 @@
                     <div class = "row-auto" style="display:flex; justify-content: center;">
                     
                         <div class="col-6-auto">
-                        <div class = "card" style = "border-radius: 50%; padding-top:20px;max-height: 87%;max-width: 50%;">
+                        <div class = "card" style = "border-radius: 50%; padding-top:20px;height: 87%;width: 50%;">
                             <div class = "card-body" style = "background-color: white; width:100%;height:100%; border-radius: 50%; display: inline-block; padding-bottom:20%">
-                                <div class = "text" style = "padding-top: 20%;">
+                                <div class = "text">
                                     Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?
-                            </div>
+                                </div>
                             </div>
                             <div class = "card-footer border-0" style = "background-color:rgba(255, 255, 255, 0);  display: inline-block;position:relative">
                                 <img src = "https://images2.imgbox.com/f7/c4/XaUFR6Fl_o.png" alt = "you are number 2" style = "height:40px; width:40px;">
@@ -42,9 +57,9 @@
                         </div>
                         </div>
                         <div class = "col-6-auto">
-                        <div class = "card" style = "border-radius: 50%; padding-top:20px;max-height: 87%;max-width: 50%;">
+                        <div class = "card" style = "border-radius: 50%; padding-top:20px;height: 87%;width: 50%;">
                             <div class = "card-body" style = "background-color: white; width:100%;height:100%; border-radius: 50%; display: inline-block; padding-bottom:20%">
-                                <div class = "text" style = "padding-top: 20%;">
+                                <div class = "text">
                                     Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?
                             </div>
                             </div>
@@ -56,9 +71,31 @@
                     </div>
                 </div>
                 <br>
-                <div class = "container-fluid" id="rectangle" style="display:flex; justify-content:center; height:50vmax; width:50vmax; padding-top:10px;">
-                    <H5>Actual Leaderboard goes here</H5>
+                <div class = "container-fluid" id="rectangle" style="display:flex; justify-content:center; padding-top:10px;">
+                     <% if(data.length === 0){ %>
+                    <h4 class="text-center display-6">Leaderboard empty.</h4>
+                    <% }else{ %>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Username</th>
+                            <th scope="col">Weight Record</th>
+                            <th scope="col">Run Record</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        <% data.forEach(ev => { %>
+                        <tr class = "table-primary" style="vertical-align:middle;">
+                            <td><%= ev.username %></td>
+                            <td><%= ev.weightrecord %></td>
+                            <td><%= ev.runrecord %></td>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <% } %>
+                </div>
             </div>
         </div>
     </main>
 </body>
+<%- include ('../partials/footer') %>

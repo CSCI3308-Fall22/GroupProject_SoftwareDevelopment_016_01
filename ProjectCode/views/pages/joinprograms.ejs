@@ -12,18 +12,15 @@
                 <thead>
                 <tr>
                     <th scope="col">Program</th>
-                    <th scope="col"></th>
                     <th scope="col">Coach</th>
-                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody id="tableBody">
                 <% data.forEach(ev => { %>
-                <tr>
-                    <td><%= ev.program_name %></td>
-                    <td></td>
+                <tr class = "table-primary" style="vertical-align:middle;">
+                    <td><p style="margin: 0;"><%= ev.program_name %></p></td>
                     <td><%= ev.owner_name %></td>
-                    <td>
+                    <td align ="right">
                         <form style="margin:0" action='/joinprogram' method='POST'><input type="hidden"
                                                                                           name="program_id"
                                                                                           value="<%- ev.program_id %>"/>

@@ -61,8 +61,8 @@ app.post('/register', async (req, res) => {
     db.any("INSERT INTO users(username, password) VALUES($1, $2)", [username, hash])
         .then(() => {
             res.locals.message = "Username Added to System!";
-            res.locals.error = "success";
-            res.redirect("/login");
+            res.locals.success = "success";
+            res.render("pages/login.ejs");
         })
         .catch(() => {
             res.locals.message = "Username already exists or is invalid type.";
@@ -143,7 +143,7 @@ app.get('/calendar', (req, res) => {
     db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id", [username_])
         .then((data) => {
             console.log(data)
-            res.render("pages/calendar.ejs", {data:data})
+            res.render("pages/calendar2.ejs", {data:data})
         })
         .catch((err) => {
             console.log(err)
@@ -157,6 +157,46 @@ app.post('/joinprogram', (req, res) => {
         .then((data) => {
             console.log("Join programs join",data)
             res.redirect("/joinprograms")
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+});
+
+app.get('/leaderboard', (req, res) => {
+    db.any("SELECT * FROM PRtable")
+        .then((data) => {
+            console.log(data)
+            res.render("pages/leaderboard.ejs", {data:data})
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+});
+
+app.get('/records', (req,res) => {
+    res.render ('pages/record.ejs');
+})
+
+app.post('/prUpdate', (req, res) => {
+    const username_ = req.session.user.username;
+    const weightRec = req.body.weightRecord;
+    const runRec = req.body.runRecord;
+    const queryPR = "SELECT * FROM PRtable WHERE username = $1";
+    
+    db.any(queryPR, [username_])
+        .then((data) => {
+
+            if (data[0] != null){
+                query1 = "UPDATE PRtable SET weightRecord = $2, runRecord = $3 WHERE PRtable.username = $1";
+            }
+            else {
+                query1 = "INSERT INTO PRtable (username, weightRecord,runRecord) VALUES ($1, $2, $3)";
+            }
+
+            db.any(query1, [username_, weightRec, runRec])
+            console.log("PersonalRec",data)
+            res.redirect("/records")
         })
         .catch((err) => {
             console.log(err)
