@@ -1,2 +1,7 @@
 Release Notes:
 
+Release Notes:
+
+11/14/2022 -The login, register, and programs pages have been rendered -The join pages work however the leave button is under development -The calendar page is in beta and will be ready by next release
+
+11/28/2022 -All Pages render, Login, Logout work, Leaderboard is pending push amd will be implemented soon. The overall format of the application is posted and will render properly. Login and logout buttons were corrected and the error messaaging system is implemented corretly. 
