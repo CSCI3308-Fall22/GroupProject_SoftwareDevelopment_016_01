@@ -56,7 +56,7 @@
                                      </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="event-modality" class="for-label"> Modality </label>
+                                    <label for="event-modality" class="for-label"> Group or Individual </label>
                                     <!-- "this.value" passed to update_location_options() refers to the text in the "value" attribute of the option that is chosen by the user -->
                                     <select
                                     class="form-control"
@@ -64,12 +64,12 @@
                                     required=""
                                     onchange="update_location_options(this.value)"
                                     >
-                                    <option value="in-person" default="">In Person</option>
-                                    <option value="remote">Remote</option>
+                                    <option value="in-person" default="">Individual</option>
+                                    <option value="remote">Group</option>
                                     </select>
                                 </div>
                                 <div class="mb-3" id="RemoteURL">
-                                    <label class="form-label">Remote URL</label>
+                                    <label class="form-label"># of people</label>
                                     <input
                                       type="text"
                                       class="form-control"
@@ -77,16 +77,16 @@
                                     />
                                   </div>
                 
-                                  <div class="mb-3" id="Location">
+                                  <!-- <div class="mb-3" id="Location">
                                     <label class="form-label">Location</label>
                                     <input
                                       type="text"
                                       class="form-control"
                                       id="LocationInput"
                                     />
-                                  </div>
+                                  </div> -->
                                   <div class="mb-3">
-                                    <label class="form-label">Attendees</label>
+                                    <label class="form-label">Muscle Grou p</label>
                                     <input type="text" class="form-control" id="Attendees" />
                                   </div>
                                 
