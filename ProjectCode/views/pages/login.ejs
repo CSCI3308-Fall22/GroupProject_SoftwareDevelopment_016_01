@@ -3,21 +3,19 @@
     <%- include ('../partials/message') %>
 </div>
 <%- include ('../partials/header') %>
-    <%- include ('../partials/menu') %>
+    <%- include ('../partials/no_menu') %>
 
         <body>
             <br><br>
-            <div class="card-header">
-                <div class="card-header-body">
-                    <div class="center">
-                        <h2>LOGIN</h2>
-                    </div>
-                </div>
+            <div class="center">
+                <h3>WeFit!</h3>
             </div>
-            <br><br>
-            <main>
+            <br><br><br><br><br>
                 <div class="card">
                     <div class="card-body">
+                        <div class="login_header">
+                            <h2>LOGIN</h2> 
+                        </div>
                         <form action="/login" method="POST">
                             <div class="form-group">
                                 <label for="username">Username</label>
@@ -33,12 +31,11 @@
                                 <button type="submit" class="login_button">Login</button>
                             </div>
                             <div class="form-group">
-                                <p>Don't have an account? <a href="/register">Register</a></p>
+                                <p><a href="/register">Don't have an account? Register</a></p>
                             </div>
                         </form>
                     </div>
                 </div>
-            </main>
             <%- include ('../partials/footer') %>
         </body>
 
