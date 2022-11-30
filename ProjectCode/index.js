@@ -146,8 +146,14 @@ app.get('/calendar', (req, res) => {
     const username_ = req.session.user.username;
     db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id ORDER BY events.time", [username_])
         .then((data) => {
-            console.log("calender", data)
-            res.render("pages/calendar.ejs", { data: data })
+            db.any("SELECT programs.program_name, programs.program_id FROM programs JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = programs.program_id", [username_])
+                .then((programs) => {
+                    console.log("calender", data, programs)
+                    res.render("pages/calendar.ejs", {data: data, programs: programs})
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
         })
         .catch((err) => {
             console.log(err)
@@ -246,10 +252,10 @@ app.get('/leave', (req, res) => {
 });
 
 app.post('/addevent', (req, res) => {
-    db.any('INSERT INTO events (program_id, title, "day", "time", description) VALUES ($1, $2, $3, $4, $5, $6)', [req.body.program_id, req.body.title, req.body.day, req.body.time, req.body.description])
+    db.any('INSERT INTO events (program_id, title, "day", "time", description) VALUES ($1, $2, $3, $4, $5)', [req.body.program_id, req.body.title, req.body.day, req.body.time, req.body.description])
         .then(() => {
-            console.log("add Event", data)
-            res.redirect("/calender")
+            console.log("add Event")
+            res.redirect("/calendar")
         })
         .catch((err) => {
             console.log(err);

@@ -28,7 +28,7 @@
                 <div class = "container-fluid">
                     <% if (data.length >= 1) { %>
                     <div class = "row-auto" style="display:flex; justify-content: center; padding-bottom: 40px;">
-                    <div class = "card" style = "border-radius: 50%; padding-top:20px; height:200px; width:300px;">
+                    <div class = "card" style = "border-radius: 50%; height:200px; width:300px;">
                         <div class = "card-body" style = "background-color: white; width: 100%; height: 100%; border-radius: 50%; display: inline-block;">
                             <div class = "text">
                                 <!--Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?aklsndklasndklaslksakldsamkldmaskdaskldaskldmask;dmas;dmaskfdma;skldmas;dm-->
@@ -44,7 +44,7 @@
                     <div class = "row gx-5" style="display:flex; justify-content: center; padding-bottom: 50px;">
                         <% if (data.length >= 2) { %>
                         <div class="col-auto">
-                        <div class = "card" style = "border-radius: 50%; padding-top:20px;height: 200px;width: 300px;">
+                        <div class = "card" style = "border-radius: 50%;height: 200px;width: 300px;">
                             <div class = "card-body" style = "background-color: white; width:100%;height:100%; border-radius: 50%; display: inline-block;">
                                 <div class = "text">
                                     <!--Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?-->
@@ -59,7 +59,7 @@
                         <% } %>
                         <% if (data.length >= 3) { %>
                         <div class = "col-auto">
-                        <div class = "card" style = "border-radius: 50%; padding-top:20px;height: 200px;width: 300px;">
+                        <div class = "card" style = "border-radius: 50%; height: 200px;width: 300px;">
                             <div class = "card-body" style = "background-color: white; width:100%;height:100%; border-radius: 50%; display: inline-block;">
                                 <div class = "text">
                                     <!--Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?-->
@@ -88,19 +88,21 @@
                     <table class="jptable">
                         <thead>
                         <tr>
-                            <!-- <th scope="col">Rank</th> -->
+                            <th scope="col">Rank</th>
                             <th scope="col">Username</th>
                             <th scope="col">Weight Record</th>
                             <th scope="col">Run Record</th>
                         </tr>
                         </thead>
                         <tbody id="tableBody" class="tableBody">
-                        <% data.forEach(ev => { %>
-                        <tr class = "table-primary2">
-                            <td><%= ev.username %></td>
-                            <td><%= ev.weightrecord %>lbs</td>
-                            <td><%= ev.runrecord %>mi</td>
-                            <% }) %>
+
+                        <% for(var i = 0; i < data.length; i++){ %>
+                            <tr class = "table-primary2"></tr>
+                            <td> <%= (i+1) %></td>
+                            <td><%= data[i].username %></td>
+                            <td><%= data[i].weightrecord %>lbs</td>
+                            <td><%= data[i].runrecord %>mi</td>
+                            <% } %>
                         </tr>
                             <tr class="create_row">
                                 <td style="border-bottom: none;"></td>

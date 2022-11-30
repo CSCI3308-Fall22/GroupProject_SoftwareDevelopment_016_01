@@ -2,107 +2,123 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menu') %>
 
-<head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"  crossorigin="anonymous"/>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous" ></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
-  <!-- <link href="./resources/css/style.css" rel = "stylesheet" > -->
-  <!-- Replace file.js with the path to script.js in the lab directory -->
-  <script src="../../script.js"></script>
-
-
-</head>
-
 <main>
-  <body onload="initialize_content()">
-    <div class = "container">
-        <div id = "calendar" class="row h-100">
-            <div class="container-fluid">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Add Event
-                </button>                    
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Update Event</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="container-flex" style="height: calc(100% - 100px)">
+        <% if(programs.length === 0){ %>
+            <h3 class="text-center display-6">You are not currently enrolled in any programs</h3>
+        <% }else{ %>
+            <% var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
+            <!--Days-->
+            <div class="row px-5 h-100" style="margin: 0">
+                <% days.forEach(day => { %>
+                    <div class=" col-sm m-1 bg-white rounded px-1 px-md-2">
+                        <div class="row p-1">
+                            <div class="col-9">
+                                <div class="h6 text-center position-relative py-2"><%= day %></div>
+                            </div>
+                            <div class="col p-0 m-0">
+                                <button type="submit" class="btn btn-outline-secondary " data-bs-toggle="modal"
+                                        data-bs-target="#addeventmodal<%= day %>">+
+                                </button>
+                            </div>
                         </div>
-                        <form id = "event-modal-form"> 
-
-                        <div class="modal-body">
-                              <div class="mb-3">
-                                <label class="form-label">Workout</label>
-                                <input type="text" class="form-control" id="eventName" />
-                              </div>
-                                <div class="mb-3">
-                                  <label for="exampleInputPassword1" class="form-label">Weekday</label>
-                                  <select type="password" class="form-select" id="exampleInputPassword1">
-                                    <option selected>Choose a day</option>
-                                    <option selected>Monday</option>
-                                    <option selected>Tuesday</option>
-                                    <option selected>Wednesday</option>
-                                    <option selected>Thursday</option>
-                                    <option selected>Friday</option>
-                                    <option selected>Saturday</option>
-                                    <option selected>Sunday</option>
-                                  </select>
+                        <!--Add Event Modal-->
+                        <div class="modal fade" id="addeventmodal<%= day %>" tabindex="-1"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <form action="/addevent" method="POST" class="m-0">
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Name</label>
+                                                <input type="text" class="form-control" name="title" required/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="program" class="form-label">Program</label>
+                                                <select class="form-select" name="program_id" required>
+                                                    <% programs.forEach(prog => { %>
+                                                        <option value="<%= prog.program_id %>"><%= prog.program_name %></option>
+                                                    <% }); %>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="day" class="form-label">Weekday</label>
+                                                <select class="form-select" name="day" required>
+                                                    <option value="monday">Monday</option>
+                                                    <option value="tuesday">Tuesday</option>
+                                                    <option value="wednesday">Wednesday</option>
+                                                    <option value="thursday">Thursday</option>
+                                                    <option value="friday">Friday</option>
+                                                    <option value="saturday">Saturday</option>
+                                                    <option value="sunday">Sunday</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-16">
+                                                <label for="time" class="form-label">time</label>
+                                                <input type="time" class="form-control is-invalid" id="time" name="time"
+                                                       required>
+                                                <div class="succ"></div>
+                                            </div>
+                                            <div class="mb-3" id="RemoteURL">
+                                                <label for="description" class="form-label">Description</label>
+                                                <textarea type="text" class="form-control" id="description"
+                                                          name="description" maxlength="1000"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit" id="submit_button" class="btn btn-primary">Add Event
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="col-md-16">
-                                    <label for="validationServer01"  class="form-label">time</label>
-                                    <input type="time" class="form-control is-invalid" id="appt" required> 
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                     </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="event-modality" class="for-label"> Group or Individual </label>
-                                    <!-- "this.value" passed to update_location_options() refers to the text in the "value" attribute of the option that is chosen by the user -->
-                                    <select
-                                    class="form-control"
-                                    id="eventModality"
-                                    required=""
-                                    onchange="update_location_options(this.value)"
-                                    >
-                                    <option value="in-person" default="">Individual</option>
-                                    <option value="remote">Group</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3" id="RemoteURL">
-                                    <label class="form-label"># of people</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="RemoteURLInput"
-                                    />
-                                  </div>
-                
-                                  <!-- <div class="mb-3" id="Location">
-                                    <label class="form-label">Location</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="LocationInput"
-                                    />
-                                  </div> -->
-                                  <div class="mb-3">
-                                    <label class="form-label">Muscle Grou p</label>
-                                    <input type="text" class="form-control" id="Attendees" />
-                                  </div>
-                                
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id = "submit_button" class="btn btn-primary" onclick="update_event_from_modal(document.getElementById('eventName'))" >Save Changes</button>
-                        </div>
-                      </form>
+                        <!--Add Event Modal-->
+                        <!--Events-->
+                        <% data.forEach(event => { if(event.day === day.toLowerCase()){ %>
+                            <div class="event row border rounded m-1 py-1" id="<%= event.event_id %>"
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#eventmodal<%= event.event_id %>">
+                                <div class="col event-title"><%= event.title %></div>
+                            </div>
+                            <!--Event Modal -->
+                            <div class="modal fade" id="eventmodal<%= event.event_id %>" aria-hidden="true"
+                                 aria-labelledby="eventmodal<%= event.event_id %>" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5"
+                                                id="exampleModalToggleLabel"><%= event.title %></h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body pt-0">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item"><%= event.description %></li>
+                                                <li class="list-group-item">@ <%= event.time %> every <%= day %>
+                                                    for <%= programs.find(x => x.program_id === event.program_id).program_name %></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Event Modal -->
+                        <% }}); %>
+                        <!--Events-->
                     </div>
-                    </div>
-                </div>
+                <% }); %>
             </div>
-        </div>
+            <!--Days-->
+        <% } %>
     </div>
-</body>
 </main>
 
 <%- include ('../partials/footer') %>

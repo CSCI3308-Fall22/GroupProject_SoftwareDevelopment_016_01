@@ -2,8 +2,9 @@
     body {
         background-color: #d9d9d9;
         color: #808080;
+        font-family: sans-serif;
     }
-    
+
     .form-control {
         display: block;
         width: 100%;
@@ -23,6 +24,52 @@
     }
 
     .form-control:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .form-control2 {
+        display: block;
+        align-items: center;
+        text-align: center;
+        width: 75%;
+        padding: 0.375rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 0;
+        appearance: none;
+        border-radius: 0.375rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-control2:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    .form-control-desc {
+        display:flex;
+        align-items: center;
+        text-align: center;
+        width: 75%;
+        height: 200px;
+        padding: 0.375rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 0;
+        appearance: none;
+        border-radius: 0.375rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-control-desc:focus {
         outline: none;
         box-shadow: none;
     }
@@ -240,6 +287,10 @@
         line-height: 1.5;
         display: inline-block;
         vertical-align: middle;
+    }
+
+    .text {
+        font-size: 40px;
     }
 </style>
 <nav>

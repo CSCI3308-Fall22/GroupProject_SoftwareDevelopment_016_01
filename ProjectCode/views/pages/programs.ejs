@@ -1,50 +1,64 @@
-<div class="col"><%- include ('../partials/message') %></div>
+<div class="col">
+    <%- include ('../partials/message') %>
+</div>
 <%- include ('../partials/header') %>
-<%- include ('../partials/menu') %>
+    <%- include ('../partials/menu') %>
 
-<main>
+        <main>
 
-    <% if(data.length === 0){ %>
-        <h3 class="text-center display-6">You are not currently enrolled in any programs</h3>
-    <% }else{ %>
-        <div class="container ">
-            <h1 class="display-6">Your Programs</h1>
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-                <% data.forEach(programs => { %>
-                    <div class="col" style="transform: rotate(0);">
-                        <div class="card h-100 w-100" style="padding:0; color: white;">
-                            <div class="card-body m-4" style = "padding:0; text-align:justify;">
-                                <a href="/programcard"><span class="link" style=" position: absolute; width: 100%; height: calc(100% - 48px); top: 0; left: 0; z-index: 1;"></span></a>
-                                <input type="hidden" name="program_id" value="<%= programs.program_id %>"/>
-                                <div class="row">
-                                    <div class="col"><h5 class="card-title" style="align-items:baseline;"><%= programs.program_name %></h5>
-                                    </div>
-                                    <div class="col"><p class="card-text text-end"><%= programs.owner_name %></p>
-                                    </div>
-                                </div>
-                                <p style="margin:0"><%= programs.description %></p>
-                            </div>
-                            <div class="card-footer w-100" style="align-items:stretch">
-                                <div class="row">
-                                    <div class="col"><p class="card-text"><%= programs.year %></div>
-                                    <div class="col">
-                                        <div class="d-flex justify-content-end">
-                                            <form style="margin:0" method="delete" action="/programs/Leave">
-                                                <input type="hidden" name="program_id"
-                                                       value="<%= programs.program_id %>"/>
-                                                <button type="submit" class="btn btn-sm btn-danger">Leave
-                                                </button>
-                                            </form>
+            <% if(data.length===0){ %>
+                <h3 class="text-center display-6">You are not currently enrolled in any programs</h3>
+                <% }else{ %>
+                    <div class="container ">
+                        <h1 class="display-6">Your Programs</h1>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <% data.forEach(programs=> { %>
+                                <div class="col" style="transform: rotate(0);">
+                                    <div class="card h-100 w-100" style="padding:0; color: white;">
+                                        <div class="card-body m-4" style="padding:0; text-align:justify; width:90%">
+                                            <a href="/programcard"><span class="link"
+                                                    style=" position: absolute; width: 100%; height: calc(100% - 48px); top: 0; left: 0; z-index: 1;"></span></a>
+                                            <input type="hidden" name="program_id" value="<%= programs.program_id %>" />
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h5 class="card-title" style="align-items:baseline;">
+                                                        <%= programs.program_name %>
+                                                    </h5>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="card-text text-end">
+                                                        <%= programs.owner_name %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <p style="margin:0">
+                                                <%= programs.description %>
+                                            </p>
+                                        </div>
+                                        <div class="card-footer w-100" style="align-items:stretch">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p class="card-text">
+                                                        <%= programs.year %>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="d-flex justify-content-end">
+                                                        <form style="margin:0" method="delete" action="/Leave">
+                                                            <input type="hidden" name="program_id"
+                                                                value="<%= programs.program_id %>" />
+                                                            <button type="submit" class="btn btn-sm btn-danger">Leave
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <% }); %>
                         </div>
                     </div>
-                <% }); %>
-            </div>
-        </div>
-    <% } %>
-</main>
+                    <% } %>
+        </main>
 
-<%- include ('../partials/footer') %>
+        <%- include ('../partials/footer') %>
