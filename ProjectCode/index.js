@@ -89,8 +89,8 @@ app.post('/login', async (req, res) => {
                 res.redirect('/programs')
             }
         })
-        .catch(() => {
-            res.locals.message = "Username Not Found";
+        .catch((err) => {
+            res.locals.message = err;
             res.locals.error = "danger";
             res.render("pages/login.ejs");
         });
@@ -118,11 +118,13 @@ app.get('/programs', (req, res) => {
     const username_ = req.session.user.username;
     db.any("SELECT * FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_] )
         .then((data) => {
-            console.log("programs",data)
+            console.log("programs")//,data)
             res.render("pages/programs.ejs", {data:data})
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
+            res.locals.message = err;
+            res.locals.error = "danger";
         });
 });
 
@@ -134,15 +136,17 @@ app.get('/joinprograms', (req, res) => {
             res.render("pages/joinprograms.ejs", {data:data})
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
+            res.locals.message = err;
+            res.locals.error = "danger";
         });
 });
 
 app.get('/calendar', (req, res) => {
     const username_ = req.session.user.username;
-    db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id", [username_])
+    db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id ORDER BY events.time", [username_])
         .then((data) => {
-            console.log(data)
+            console.log("calender",data)
             res.render("pages/calendar.ejs", {data:data})
         })
         .catch((err) => {
@@ -159,7 +163,9 @@ app.post('/joinprogram', (req, res) => {
             res.redirect("/joinprograms")
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
+            res.locals.message = err;
+            res.locals.error = "danger";
         });
 });
 
@@ -170,7 +176,9 @@ app.get('/leaderboard', (req, res) => {
             res.render("pages/leaderboard.ejs", {data:data})
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
+            res.locals.message = err;
+            res.locals.error = "danger";
         });
 });
 
@@ -199,7 +207,23 @@ app.post('/prUpdate', (req, res) => {
             res.redirect("/records")
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
+            res.locals.message = err;
+            res.locals.error = "danger";
+        });
+});
+
+app.get('/leave', (req, res) => {
+    const username_ = req.session.user.username;
+    db.any('DELETE FROM usersToPrograms WHERE usersToPrograms.username = $1 AND usersToPrograms.program_id = $2', [username_,req.query.program_id])
+        .then(() => {
+            console.log("leave",)
+            res.redirect("/programs")
+        })
+        .catch((err) => {
+            console.log(err);
+            res.locals.message = err;
+            res.locals.error = "danger";
         });
 });
 
