@@ -143,7 +143,7 @@ app.get('/calendar', (req, res) => {
     db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id", [username_])
         .then((data) => {
             console.log(data)
-            res.render("pages/calendar2.ejs", {data:data})
+            res.render("pages/calendar.ejs", {data:data})
         })
         .catch((err) => {
             console.log(err)
@@ -183,7 +183,7 @@ app.post('/prUpdate', (req, res) => {
     const weightRec = req.body.weightRecord;
     const runRec = req.body.runRecord;
     const queryPR = "SELECT * FROM PRtable WHERE username = $1";
-    
+
     db.any(queryPR, [username_])
         .then((data) => {
 
@@ -195,8 +195,10 @@ app.post('/prUpdate', (req, res) => {
             }
 
             db.any(query1, [username_, weightRec, runRec])
+            res.locals.message = "Added to System!";
+            res.locals.success = "success";
             console.log("PersonalRec",data)
-            res.redirect("/records")
+            res.redirect("/leaderboard")
         })
         .catch((err) => {
             console.log(err)
