@@ -69,7 +69,7 @@ app.post('/register', async (req, res) => {
             res.locals.error = "danger";
             res.render("pages/register.ejs");
             //res.redirect('/register')
-            
+
         });
 });
 
@@ -116,10 +116,10 @@ app.get('/logout', (req, res) => {
 
 app.get('/programs', (req, res) => {
     const username_ = req.session.user.username;
-    db.any("SELECT * FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_] )
+    db.any("SELECT * FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_])
         .then((data) => {
             console.log("programs")//,data)
-            res.render("pages/programs.ejs", {data:data})
+            res.render("pages/programs.ejs", {data: data})
         })
         .catch((err) => {
             console.log(err);
@@ -132,8 +132,8 @@ app.get('/joinprograms', (req, res) => {
     const username_ = req.session.user.username;
     db.any("SELECT programs.program_id, program_name, password, owner_name FROM programs EXCEPT SELECT programs.program_id, program_name, password, owner_name FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_])
         .then((data) => {
-            console.log("Join programs",data)
-            res.render("pages/joinprograms.ejs", {data:data})
+            console.log("Join programs", data)
+            res.render("pages/joinprograms.ejs", {data: data})
         })
         .catch((err) => {
             console.log(err);
@@ -146,8 +146,14 @@ app.get('/calendar', (req, res) => {
     const username_ = req.session.user.username;
     db.any("SELECT * FROM events JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = events.program_id ORDER BY events.time", [username_])
         .then((data) => {
-            console.log("calender",data)
-            res.render("pages/calendar.ejs", {data:data})
+            db.any("SELECT programs.program_name, programs.program_id FROM programs JOIN (SELECT programs.program_id FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1) AS x  ON x.program_id = programs.program_id", [username_])
+                .then((programs) => {
+                    console.log("calender", data, programs)
+                    res.render("pages/calendar.ejs", {data: data, programs: programs})
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
         })
         .catch((err) => {
             console.log(err)
@@ -157,9 +163,9 @@ app.get('/calendar', (req, res) => {
 app.post('/joinprogram', (req, res) => {
     const program_id = req.body.program_id;
     const username_ = req.session.user.username;
-    db.any("INSERT INTO usersToPrograms (username, program_id) VALUES ($1, $2)", [username_,program_id])
+    db.any("INSERT INTO usersToPrograms (username, program_id) VALUES ($1, $2)", [username_, program_id])
         .then((data) => {
-            console.log("Join programs join",data)
+            console.log("Join programs join", data)
             res.redirect("/joinprograms")
         })
         .catch((err) => {
@@ -173,7 +179,7 @@ app.get('/leaderboard', (req, res) => {
     db.any("SELECT * FROM PRtable")
         .then((data) => {
             console.log(data)
-            res.render("pages/leaderboard.ejs", {data:data})
+            res.render("pages/leaderboard.ejs", {data: data})
         })
         .catch((err) => {
             console.log(err);
@@ -182,8 +188,8 @@ app.get('/leaderboard', (req, res) => {
         });
 });
 
-app.get('/records', (req,res) => {
-    res.render ('pages/record.ejs');
+app.get('/records', (req, res) => {
+    res.render('pages/record.ejs');
 })
 
 app.post('/prUpdate', (req, res) => {
@@ -195,17 +201,16 @@ app.post('/prUpdate', (req, res) => {
     db.any(queryPR, [username_])
         .then((data) => {
 
-            if (data[0] != null){
+            if (data[0] != null) {
                 query1 = "UPDATE PRtable SET weightRecord = $2, runRecord = $3 WHERE PRtable.username = $1";
-            }
-            else {
+            } else {
                 query1 = "INSERT INTO PRtable (username, weightRecord,runRecord) VALUES ($1, $2, $3)";
             }
 
             db.any(query1, [username_, weightRec, runRec])
             res.locals.message = "Added to System!";
             res.locals.success = "success";
-            console.log("PersonalRec",data)
+            console.log("PersonalRec", data)
             res.redirect("/leaderboard")
         })
         .catch((err) => {
@@ -217,7 +222,7 @@ app.post('/prUpdate', (req, res) => {
 
 app.get('/leave', (req, res) => {
     const username_ = req.session.user.username;
-    db.any('DELETE FROM usersToPrograms WHERE usersToPrograms.username = $1 AND usersToPrograms.program_id = $2', [username_,req.query.program_id])
+    db.any('DELETE FROM usersToPrograms WHERE usersToPrograms.username = $1 AND usersToPrograms.program_id = $2', [username_, req.query.program_id])
         .then(() => {
             console.log("leave",)
             res.redirect("/programs")
@@ -230,10 +235,10 @@ app.get('/leave', (req, res) => {
 });
 
 app.post('/addevent', (req, res) => {
-    db.any('INSERT INTO events (program_id, title, "day", "time", description) VALUES ($1, $2, $3, $4, $5, $6)', [req.body.program_id, req.body.title, req.body.day, req.body.time, req.body.description])
+    db.any('INSERT INTO events (program_id, title, "day", "time", description) VALUES ($1, $2, $3, $4, $5)', [req.body.program_id, req.body.title, req.body.day, req.body.time, req.body.description])
         .then(() => {
-            console.log("add Event",data)
-            res.redirect("/calender")
+            console.log("add Event")
+            res.redirect("/calendar")
         })
         .catch((err) => {
             console.log(err);
