@@ -3,7 +3,7 @@
         background-color: #d9d9d9;
         color: #808080;
     }
-
+    
     .form-control {
         display: block;
         width: 100%;
@@ -14,7 +14,7 @@
         color: #212529;
         background-color: #fff;
         background-clip: padding-box;
-        border: 1px solid #dbedd3;
+        border: 0;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -76,9 +76,14 @@
         color: #808080;
     }
 
-    .join_button{
+    .join_button {
         border-radius: 10px;
         background-color: #eb7521;
+    }
+
+    .close_button {
+        border-radius: 10px;
+        background-color: #77bd28;
     }
 
     /* =====INPUT TEXT BOXES===== */
@@ -111,6 +116,7 @@
     }
 
     /* =====INPUT TEXT BOXES===== */
+
     /* =====BUTTON===== */
     button {
         background-color: #4CAF50;
@@ -199,7 +205,7 @@
         vertical-align: middle;
     }
 
-    td{
+    td {
         padding: 10px;
         margin: 0;
         /* border-top: 1px solid #252525; */
@@ -207,19 +213,33 @@
         font-size: 20px;
     }
 
-    .create_row{
+    .create_row {
         border-bottom: none;
         padding: 10px;
     }
 
-    .table_head{
+    .table_head {
         font-size: 35px;
     }
 
-    tr.table-primary2:hover{
+    tr.table-primary2:hover {
         background-color: #89cf3a;
         /* opacity: 0.1; */
         color: #808080;
+    }
+
+    .center {
+        line-height: 200px;
+        height: 50px;
+        text-align: center;
+    }
+
+    .center h3 {
+        font-size: 70px;
+        font-style: italic;
+        line-height: 1.5;
+        display: inline-block;
+        vertical-align: middle;
     }
 </style>
 <nav>
@@ -236,49 +256,10 @@
     </ul>
     <ul>
         <li>
-            <% if(typeof data !="undefined" ){ %>
-                <a href="/joinprograms">Join Programs</a>
-                <% } %>
-        </li>
-        <li>
-            <% if(typeof data !="undefined" ){ %>
-                <a href="/records">PR</a>
-                <% } %>
+            <a href="/joinprograms">Join Programs</a>
         </li>
         <li>
             <a href="/logout">Logout</a>
         </li>
     </ul>
 </nav>
-
-<!-- <header>
-    <nav class="navbar navbar-expand-sm border-bottom navbar">
-        <div class="container-fluid">
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbar-collapse" aria-controls="navbar" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse " id="navbar-collapse">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a href="/programs" class="nav-link">Programs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/calendar" class="nav-link">Calendar</a>
-                    </li>
-                </ul>
-                <div class="navbar-nav">
-                    <div class="nav-item">
-                        <% if(typeof data != "undefined"){ %>
-                            <a href="/joinprograms" class="nav-link">Join Programs</a>
-                        <% } %>
-                    </div>
-                    <div class="nav-item">
-                        <a href="/logout" class="nav-link">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header> -->

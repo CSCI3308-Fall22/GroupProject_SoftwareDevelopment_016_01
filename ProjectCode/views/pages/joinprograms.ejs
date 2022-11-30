@@ -8,14 +8,52 @@
             <% if(data.length===0){ %>
                 <h4 class="text-center display-6">You are currently enrolled in all programs</h4>
                 <% }else{ %>
+
+                    <div class="modal" id="createModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4>Create Event</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <form action="/joinprogram/add" method="POST">
+                                    <div class="modal-body">
+                                        <div class="form-control">
+                                            <label for="program_name">Program Name</label>
+                                            <input name="program_name" type="text" placeholder="Program Name">
+                                        </div>
+                                        <div class="form-control">
+                                            <label for="desc">Description</label>
+                                            <input name="desc" type="text" placeholder="Description">
+                                        </div>
+                                        <div class="form-control">
+                                            <label for="year">Year</label>
+                                            <input name="year" type="text" placeholder="Year">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" data-bs-dismiss="modal" class="close_button">Cancel</button>
+                                        <button type="submit" class="join_button">Create</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="container">
                         <h1 class="display-6">Join Programs</h1>
                         <div class="jpcard">
                             <table class="jptable">
                                 <thead>
-                                    <tr>
+                                    <tr style="border-bottom: 1px solid #808080;">
                                         <th class="table_head" scope="col">Program</th>
                                         <th class="table_head" scope="col">Coach</th>
+                                        <th>
+                                            <form style="margin:0; align-items: right;" align="right">
+                                                <button type='button' class="join_button" data-bs-toggle="modal"
+                                                    data-bs-target="#createModal">Create</button>
+                                            </form>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody" . class="tableBody">
@@ -37,11 +75,7 @@
                                         </tr>
                                         <tr class="create_row">
                                             <td style="border-bottom: none;"></td>
-                                            <td style="border-bottom: none;">
-                                                <form style="margin:0">
-                                                    <button type='submit' class="join_button">Create</button>
-                                                </form>
-                                            </td>
+                                            <td style="border-bottom: none;"></td>
                                             <td style="border-bottom: none;"></td>
                                         </tr>
                                 </tbody>
