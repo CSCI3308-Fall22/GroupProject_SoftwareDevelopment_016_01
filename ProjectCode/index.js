@@ -229,4 +229,15 @@ app.get('/leave', (req, res) => {
         });
 });
 
-
+app.post('/addevent', (req, res) => {
+    db.any('INSERT INTO events (program_id, title, "day", "time", description) VALUES ($1, $2, $3, $4, $5, $6)', [req.body.program_id, req.body.title, req.body.day, req.body.time, req.body.description])
+        .then(() => {
+            console.log("add Event",data)
+            res.redirect("/calender")
+        })
+        .catch((err) => {
+            console.log(err);
+            res.locals.message = err;
+            res.locals.error = "danger";
+        });
+});
