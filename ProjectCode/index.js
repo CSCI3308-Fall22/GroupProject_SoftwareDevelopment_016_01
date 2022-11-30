@@ -90,7 +90,7 @@ app.post('/login', async (req, res) => {
             }
         })
         .catch(() => {
-            res.locals.message = "Username Not Found";
+            res.locals.message = "Username/Password Incorrect";
             res.locals.error = "danger";
             res.render("pages/login.ejs");
         });

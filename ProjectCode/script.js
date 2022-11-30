@@ -1,6 +1,6 @@
 const CALENDAR_EVENTS = [
     {
-        name: 'Quiz',
+        name: 'Workout',
         day: 'Tuesday',
         time: '11:30',
         modality: 'In Person',
@@ -9,7 +9,7 @@ const CALENDAR_EVENTS = [
         attendees: 'Class',
     },
     {
-        name: 'Test',
+        name: 'Yoga',
         day: 'Wednesday',
         time: '12:00',
         modality: 'Online',
