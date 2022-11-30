@@ -3,10 +3,13 @@
 <%- include ('../partials/menu') %>
 
 <main>
+    <div class="container-flex" style="height: calc(100% - 100px)">
     <% var days = ['Sunday', 'Monday', 'Tuesday', 'Thursday', 'Friday', 'Saturday']; %>
     <div class="row px-5 h-100" style="margin: 0">
         <% days.forEach(day => { %>
+            <!--        event-->
             <div class=" col-sm m-1 bg-white rounded px-1 px-md-2">
+<<<<<<< HEAD
                 <div style="padding-right:5vw " class="h6 text-center position-relative py-2"><%= day %>    
                     <span style="padding-left:15mm">  <image style="width: 2.5vw" src="https://cdn-icons-png.flaticon.com/512/148/148764.png" 
                         type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -83,27 +86,35 @@
                         </div>
                     </div>
                 </div>
+=======
+                <div class="h6 text-center position-relative py-2"><%= day %></div>
+
+>>>>>>> 4f29234c1181e2231ce0d886a88d32717a3d1c80
                 <% data.forEach(event => { if(event.day === day.toLowerCase()){ %>
-                    <div class="event row border rounded m-1 py-1" id="<%= event.event_id %>"  data-bs-toggle="modal" data-bs-target="#eventmodal">
+                    <div class="event row border rounded m-1 py-1" id="<%= event.event_id %>" data-bs-toggle="modal"
+                         data-bs-target="#eventmodal<%= event.event_id %>">
                         <div class="col event-title"><%= event.title %></div>
                     </div>
-                    <div class="modal fade" id="eventmodal" aria-hidden="true" aria-labelledby="eventmodal" tabindex="-1">
+                    <!--Modal -->
+                    <div class="modal fade" id="eventmodal<%= event.event_id %>" aria-hidden="true"
+                         aria-labelledby="eventmodal<%= event.event_id %>" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel"><%= event.title %></h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                 </div>
-                                    <div class="modal-body">
-                                        <p><%=event.description%></p>
-                                    </div>
+                                <div class="modal-body">
+                                    <p><%= event.description %></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 <% }}); %>
             </div>
         <% }); %>
-    </div>
+    </div></div>
 </main>
 
 <%- include ('../partials/footer') %>
