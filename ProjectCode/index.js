@@ -183,7 +183,7 @@ app.post('/prUpdate', (req, res) => {
     const weightRec = req.body.weightRecord;
     const runRec = req.body.runRecord;
     const queryPR = "SELECT * FROM PRtable WHERE username = $1";
-    
+
     db.any(queryPR, [username_])
         .then((data) => {
 
@@ -195,8 +195,10 @@ app.post('/prUpdate', (req, res) => {
             }
 
             db.any(query1, [username_, weightRec, runRec])
+            res.locals.message = "Added to System!";
+            res.locals.success = "success";
             console.log("PersonalRec",data)
-            res.redirect("/records")
+            res.redirect("/leaderboard")
         })
         .catch((err) => {
             console.log(err)
