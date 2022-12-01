@@ -3,42 +3,39 @@
     <%- include ('../partials/message') %>
 </div>
 <%- include ('../partials/header') %>
-    <%- include ('../partials/menu') %>
+    <%- include ('../partials/no_menu') %>
 
         <body>
             <br><br>
-            <div class="card-header">
-                <div class="card-header-body">
-                    <div class="center">
+            <div class="center">
+                <h3>WeFit!</h3>
+            </div>
+            <br><br><br><br><br>
+            <div class="card">
+                <div class="card-body">
+                    <div class="login_header">
                         <h2>LOGIN</h2>
                     </div>
+                    <form action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="Username" maxlength="50" minlength="4">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Enter password" maxlength="60" minlength="5">
+                        </div>
+                        <div class="form-group" style="padding-top: 5px;">
+                            <button type="submit" class="login_button">Login</button>
+                        </div>
+                        <div class="form-group">
+                            <p><a href="/register">Don't have an account? Register</a></p>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <br><br>
-            <main>
-                <div class="card">
-                    <div class="card-body">
-                        <form action="/login" method="POST">
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Username" maxlength="50" minlength="4">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Enter password" maxlength="60" minlength="5">
-                            </div>
-                            <div class="form-group" style="padding-top: 5px;">
-                                <button type="submit" class="login_button">Login</button>
-                            </div>
-                            <div class="form-group">
-                                <p>Don't have an account? <a href="/register">Register</a></p>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </main>
             <%- include ('../partials/footer') %>
         </body>
 
