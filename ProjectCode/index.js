@@ -119,7 +119,7 @@ app.get('/programs', (req, res) => {
     db.any("SELECT * FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_])
         .then((data) => {
             console.log("programs")//,data)
-            res.render("pages/programs.ejs", {data: data})
+            res.render("pages/programs.ejs", { data: data })
         })
         .catch((err) => {
             console.log(err);
@@ -133,7 +133,7 @@ app.get('/joinprograms', (req, res) => {
     db.any("SELECT programs.program_id, program_name, password, owner_name FROM programs EXCEPT SELECT programs.program_id, program_name, password, owner_name FROM programs JOIN usersToPrograms ON programs.program_id = usersToPrograms.program_id WHERE usersToPrograms.username = $1", [username_])
         .then((data) => {
             console.log("Join programs", data)
-            res.render("pages/joinprograms.ejs", {data: data})
+            res.render("pages/joinprograms.ejs", { data: data })
         })
         .catch((err) => {
             console.log(err);
@@ -175,11 +175,28 @@ app.post('/joinprogram', (req, res) => {
         });
 });
 
+app.post('/joinprogram/add', (req, res) => {
+    const pName = req.body.program_name;
+    const description = req.body.desc;
+    const year_ = req.body.year;
+    const username_ = req.session.user.username;
+    db.any("INSERT INTO programs (program_name, description, owner_name, year) VALUES ($1, $2, $3, $4)", [pName, description, username_, year_])
+        .then((data) => {
+            console.log("Join programs join", data)
+            res.redirect("/joinprograms")
+        })
+        .catch((err) => {
+            console.log(err);
+            res.locals.message = err;
+            res.locals.error = "danger";
+        });
+});
+
 app.get('/leaderboard', (req, res) => {
-    db.any("SELECT * FROM PRtable")
+    db.any("SELECT * FROM PRtable ORDER BY ((weightrecord+runrecord)/2) DESC")
         .then((data) => {
             console.log(data)
-            res.render("pages/leaderboard.ejs", {data: data})
+            res.render("pages/leaderboard.ejs", { data: data })
         })
         .catch((err) => {
             console.log(err);
@@ -203,7 +220,8 @@ app.post('/prUpdate', (req, res) => {
 
             if (data[0] != null) {
                 query1 = "UPDATE PRtable SET weightRecord = $2, runRecord = $3 WHERE PRtable.username = $1";
-            } else {
+            }
+            else {
                 query1 = "INSERT INTO PRtable (username, weightRecord,runRecord) VALUES ($1, $2, $3)";
             }
 
