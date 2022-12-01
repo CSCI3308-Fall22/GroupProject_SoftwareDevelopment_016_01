@@ -36,7 +36,8 @@
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label class="form-label">Name</label>
-                                                <input type="text" class="form-control" name="title" required/>
+                                                <input type="text" class="form-control" name="title" required
+                                                       maxlength="100"/>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="program" class="form-label">Program</label>
@@ -88,7 +89,10 @@
                             <div class="event row border rounded m-1 py-1" id="<%= event.event_id %>"
                                  data-bs-toggle="modal"
                                  data-bs-target="#eventmodal<%= event.event_id %>">
-                                <div class="col event-title"><%= event.title %></div>
+                                <div class="col event-title" style=" overflow: hidden;
+  max-width: 25ch;
+  text-overflow: ellipsis;
+  white-space: nowrap;"><%= event.title %></div>
                             </div>
                             <!--Event Modal -->
                             <div class="modal fade" id="eventmodal<%= event.event_id %>" aria-hidden="true"
@@ -96,14 +100,14 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5"
+                                            <h1 class="modal-title fs-5 text-break"
                                                 id="exampleModalToggleLabel"><%= event.title %></h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body pt-0">
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><%= event.description %></li>
+                                                <li class="list-group-item text-break"><%= event.description %></li>
                                                 <li class="list-group-item">@ <%= event.time %> every <%= day %>
                                                     for <%= programs.find(x => x.program_id === event.program_id).program_name %></li>
                                             </ul>
