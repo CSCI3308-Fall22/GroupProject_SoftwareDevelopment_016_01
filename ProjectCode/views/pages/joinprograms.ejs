@@ -2,87 +2,88 @@
     <%- include ('../partials/message') %>
 </div>
 <%- include ('../partials/header') %>
-    <%- include ('../partials/menu') %>
+<%- include ('../partials/menu') %>
 
-        <main>
-            <% if(data.length===0){ %>
-                <h4 class="text-center display-6">You are currently enrolled in all programs</h4>
-                <% }else{ %>
-
-                    <div class="modal" id="createModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4>Create Event</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <form action="/joinprogram/add" method="POST">
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="program_name">Program Name</label>
-                                            <input class="form-control2" name="program_name" type="text" placeholder="Program Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="desc">Description</label>
-                                            <input class="form-control-desc" name="desc" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="year">Year</label>
-                                            <input class="form-control2" name="year" type="text" placeholder="Year">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" data-bs-dismiss="modal" class="close_button">Cancel</button>
-                                        <button type="submit" class="join_button">Create</button>
-                                    </div>
-                                </form>
-                            </div>
+<main>
+    <div class="modal" id="createModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Create Event</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form action="/joinprogram/add" method="POST">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="program_name">Program Name</label>
+                            <input class="form-control2" name="program_name" type="text" placeholder="Program Name"
+                                   maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Description</label>
+                            <input class="form-control-desc" name="desc" type="text" maxlength="1000">
+                        </div>
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <input class="form-control2" name="year" type="number" placeholder="Year" min="0"
+                                   max="9999">
                         </div>
                     </div>
-
-                    <div class="container">
-                        <h1 class="display-6">Join Programs</h1>
-                        <div class="jpcard">
-                            <table class="jptable">
-                                <thead>
-                                    <tr style="border-bottom: 1px solid #808080;">
-                                        <th class="table_head" scope="col">Program</th>
-                                        <th class="table_head" scope="col">Coach</th>
-                                        <th>
-                                            <form style="margin:0; align-items: right;" align="right">
-                                                <button type='button' class="join_button" data-bs-toggle="modal"
-                                                    data-bs-target="#createModal">Create</button>
-                                            </form>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableBody" . class="tableBody">
-                                    <% data.forEach(ev=> { %>
-                                        <tr class="table-primary2">
-                                            <td>
-                                                <%= ev.program_name %>
-                                            </td>
-                                            <td>
-                                                <%= ev.owner_name %>
-                                            </td>
-                                            <td align="right">
-                                                <form style="margin:0" action='/joinprogram' method='POST'><input
-                                                        type="hidden" name="program_id" value="<%- ev.program_id %>" />
-                                                    <button type='submit' class="join_button">Join</button>
-                                                </form>
-                                            </td>
-                                            <% }) %>
-                                        </tr>
-                                        <tr class="create_row">
-                                            <td style="border-bottom: none;"></td>
-                                            <td style="border-bottom: none;"></td>
-                                            <td style="border-bottom: none;"></td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" data-bs-dismiss="modal" class="close_button">Cancel</button>
+                        <button type="submit" class="join_button">Create</button>
                     </div>
-                    <% } %>
-        </main>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <% if(data.length === 0){ %>
+            <h4 class="text-center display-6">You are currently enrolled in all programs</h4>
+        <% }else{ %>
+            <h1 class="display-6">Join Programs</h1>
+        <% } %>
+        <div class="jpcard">
+            <table class="jptable">
+                <thead>
+                <tr style="border-bottom: 1px solid #808080;">
+                    <th class="table_head" scope="col">Program</th>
+                    <th class="table_head" scope="col">Coach</th>
+                    <th>
+                        <form style="margin:0; align-items: right;" align="right">
+                            <button type='button' class="join_button" data-bs-toggle="modal"
+                                    data-bs-target="#createModal">Create
+                            </button>
+                        </form>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="tableBody" . class="tableBody">
+                <% data.forEach(ev=> { %>
+                <tr class="table-primary2">
+                    <td>
+                        <%= ev.program_name %>
+                    </td>
+                    <td>
+                        <%= ev.owner_name %>
+                    </td>
+                    <td align="right">
+                        <form style="margin:0" action='/joinprogram' method='POST'><input
+                                    type="hidden" name="program_id" value="<%- ev.program_id %>"/>
+                            <button type='submit' class="join_button">Join</button>
+                        </form>
+                    </td>
+                    <% }) %>
+                </tr>
+                <tr class="create_row">
+                    <td style="border-bottom: none;"></td>
+                    <td style="border-bottom: none;"></td>
+                    <td style="border-bottom: none;"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 
-        <%- include ('../partials/footer') %>
+<%- include ('../partials/footer') %>
