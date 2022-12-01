@@ -1,120 +1,148 @@
-<div class="col"><%- include ('../partials/message') %></div>
+<div class="col">
+    <%- include ('../partials/message') %>
+</div>
 <%- include ('../partials/header') %>
-<%- include ('../partials/menu') %>
+    <%- include ('../partials/menu') %>
 
-<style>
-    .center#rectangle {
-        background-color: #77bd28;
-        margin:auto;
-        border-radius: 10px;
-        color: white;
-    }
-    .container-fluid#rectangle {
-        background-color:#77bd28;
-        border-radius: 10px;
-        color: white
-    }
-</style>
+        <style>
+            .center#rectangle {
+                background-color: #77bd28;
+                margin: auto;
+                border-radius: 10px;
+                color: white;
+            }
 
-<body>
-    <main>
-        <div class = "container-fluid">
-            <div class = "leaderboard">
-                <br>
-                <div class = "center" id = "rectangle">
-                    <h2> LEADERBOARD </h2>
-                </div>
-                <br><br>
-                <div class = "container-fluid">
-                    <% if (data.length >= 1) { %>
-                    <div class = "row-auto" style="display:flex; justify-content: center; padding-bottom: 40px;">
-                    <div class = "card" style = "border-radius: 50%; height:200px; width:300px;">
-                        <div class = "card-body" style = "background-color: white; width: 100%; height: 100%; border-radius: 50%; display: inline-block;">
-                            <div class = "text">
-                                <!--Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?aklsndklasndklaslksakldsamkldmaskdaskldaskldmask;dmas;dmaskfdma;skldmas;dm-->
-                                <%= data[0].username %>
-                            </div>
+            .container-fluid#rectangle {
+                background-color: #77bd28;
+                border-radius: 10px;
+                color: white
+            }
+        </style>
+
+        <body>
+            <main style="display: block; overflow: auto; ">
+                <div class="container-flex" style="height:calc(100% - 105px);">
+                    <div class="leaderboard">
+                        <br>
+                        <div class="center" id="rectangle">
+                            <h2> LEADERBOARD </h2>
                         </div>
-                        <div class = "card-footer border-0" style = "background-color:rgba(255, 255, 255, 0);  display: inline-block; ">
-                            <img src = "https://images2.imgbox.com/5a/bd/Q4KNJ5wq_o.png" alt = "you are number 1" style = "height:40px; width:40px; ">
-                        </div>   
-                    </div>
-                    </div>
-                    <% } %>
-                    <div class = "row gx-5" style="display:flex; justify-content: center; padding-bottom: 50px;">
-                        <% if (data.length >= 2) { %>
-                        <div class="col-auto">
-                        <div class = "card" style = "border-radius: 50%;height: 200px;width: 300px;">
-                            <div class = "card-body" style = "background-color: white; width:100%;height:100%; border-radius: 50%; display: inline-block;">
-                                <div class = "text">
-                                    <!--Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?-->
-                                    <%= data[1].username %>
+                        <br><br>
+                        <div class="container-fluid">
+                            <% if (data.length>= 1) { %>
+                                <div class="row-auto"
+                                    style="display:flex; justify-content: center; padding-bottom: 40px;">
+                                    <div class="card" style="border-radius: 50%; height:200px; width:300px;">
+                                        <div class="card-body"
+                                            style="background-color: white; width: 100%; height: 100%; border-radius: 50%; display: inline-block;">
+                                            <div class="text">
+                                                <!--Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?aklsndklasndklaslksakldsamkldmaskdaskldaskldmask;dmas;dmaskfdma;skldmas;dm-->
+                                                <%= data[0].username %>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer border-0"
+                                            style="background-color:rgba(255, 255, 255, 0);  display: inline-block; ">
+                                            <img src="https://images2.imgbox.com/5a/bd/Q4KNJ5wq_o.png"
+                                                alt="you are number 1" style="height:40px; width:40px; ">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class = "card-footer border-0" style = "background-color:rgba(255, 255, 255, 0);  display: inline-block;position:relative">
-                                <img src = "https://images2.imgbox.com/f7/c4/XaUFR6Fl_o.png" alt = "you are number 2" style = "height:40px; width:40px;">
-                            </div>   
+                                <% } %>
+                                    <div class="row gx-5"
+                                        style="display:flex; justify-content: center; padding-bottom: 50px;">
+                                        <% if (data.length>= 2) { %>
+                                            <div class="col-auto">
+                                                <div class="card"
+                                                    style="border-radius: 50%;height: 200px;width: 300px;">
+                                                    <div class="card-body"
+                                                        style="background-color: white; width:100%;height:100%; border-radius: 50%; display: inline-block;">
+                                                        <div class="text">
+                                                            <!--Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?-->
+                                                            <%= data[1].username %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer border-0"
+                                                        style="background-color:rgba(255, 255, 255, 0);  display: inline-block;position:relative">
+                                                        <img src="https://images2.imgbox.com/f7/c4/XaUFR6Fl_o.png"
+                                                            alt="you are number 2" style="height:40px; width:40px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                                <% if (data.length>= 3) { %>
+                                                    <div class="col-auto">
+                                                        <div class="card"
+                                                            style="border-radius: 50%; height: 200px;width: 300px;">
+                                                            <div class="card-body"
+                                                                style="background-color: white; width:100%;height:100%; border-radius: 50%; display: inline-block;">
+                                                                <div class="text">
+                                                                    <!--Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?-->
+                                                                    <%= data[2].username %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer border-0"
+                                                                style="background-color:rgba(255, 255, 255, 0);  display: inline-block;position:relative">
+                                                                <img src="https://images2.imgbox.com/47/13/z05O5zsv_o.png"
+                                                                    alt="you are number 3"
+                                                                    style="height:40px; width:40px;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                    </div>
                         </div>
-                        </div>
-                        <% } %>
-                        <% if (data.length >= 3) { %>
-                        <div class = "col-auto">
-                        <div class = "card" style = "border-radius: 50%; height: 200px;width: 300px;">
-                            <div class = "card-body" style = "background-color: white; width:100%;height:100%; border-radius: 50%; display: inline-block;">
-                                <div class = "text">
-                                    <!--Some username blah ...  / Profile picture / link ... ? akldnslakndsalkdnkasldmcklsamdlasdmasl;dmal;ms;ld?-->
-                                    <%= data[2].username %>
-                            </div>
-                            </div>
-                            <div class = "card-footer border-0" style = "background-color:rgba(255, 255, 255, 0);  display: inline-block;position:relative">
-                                <img src = "https://images2.imgbox.com/47/13/z05O5zsv_o.png" alt = "you are number 3" style = "height:40px; width:40px;">
-                            </div>   
-                        </div>
-                        </div>
-                        <% } %>
-                    </div>
-                </div>
-                
-                <div class = "container-fluid" id="rectangle" style=" padding:10px;">
-                    
-                    <div style="display:flex; justify-content: end">
-                    <form style="margin:0" action='/records' method='GET'>
-                            <button type='submit' class='login_button'>Add/Edit Record</button>
-                    </form>
-                    </div>
-                     <% if(data.length === 0){ %>
-                    <h4 class="text-center display-6">Leaderboard empty.</h4>
-                    <% }else{ %>
-                    <table class="jptable">
-                        <thead>
-                        <tr>
-                            <th scope="col">Rank</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Weight Record</th>
-                            <th scope="col">Run Record</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tableBody" class="tableBody">
 
-                        <% for(var i = 0; i < data.length; i++){ %>
-                            <tr class = "table-primary2"></tr>
-                            <td> <%= (i+1) %></td>
-                            <td><%= data[i].username %></td>
-                            <td><%= data[i].weightrecord %>lbs</td>
-                            <td><%= data[i].runrecord %>mi</td>
-                            <% } %>
-                        </tr>
-                            <tr class="create_row">
-                                <td style="border-bottom: none;"></td>
-                                <td style="border-bottom: none;"></td>
-                                <td style="border-bottom: none;"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <% } %>
+                        <div class="container-fluid" id="rectangle" style=" padding:10px;">
+
+                            <div style="display:flex; justify-content: end">
+                                <form style="margin:0" action='/records' method='GET'>
+                                    <button type='submit' class='login_button'>Add/Edit Record</button>
+                                </form>
+                            </div>
+                            <% if(data.length===0){ %>
+                                <h4 class="text-center display-6">Leaderboard empty.</h4>
+                                <% }else{ %>
+                                    <table class="jptable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Rank</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Weight Record</th>
+                                                <th scope="col">Run Record</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableBody" class="tableBody">
+
+                                            <% for(var i=0; i < data.length; i++){ %>
+                                                <tr class="table-primary2"></tr>
+                                                <td>
+                                                    <%= (i+1) %>
+                                                </td>
+                                                <td>
+                                                    <%= data[i].username %>
+                                                </td>
+                                                <td>
+                                                    <%= data[i].weightrecord %>lbs
+                                                </td>
+                                                <td>
+                                                    <%= data[i].runrecord %>mi
+                                                </td>
+                                                <% } %>
+                                                    </tr>
+                                                    <tr class="create_row">
+                                                        <td style="border-bottom: none;"></td>
+                                                        <td style="border-bottom: none;"></td>
+                                                        <td style="border-bottom: none;"></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                    <% } %>
+                        </div>
+                    </div>
+                    <br><br>
+                    <br><br>
                 </div>
-            </div>
-        </div>
-    </main>
-</body>
-<%- include ('../partials/footer') %>
+                </div>
+            </main>
+        </body>
+        <%- include ('../partials/footer') %>
