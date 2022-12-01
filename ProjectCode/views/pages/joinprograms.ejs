@@ -7,29 +7,30 @@
 <main>
     <div class="modal" id="createModal">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content" style="background-color: #d9d9d9;">
+                <div class="modal-header" style="border: none;">
                     <h4>Create Event</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form action="/joinprogram/add" method="POST">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="program_name">Program Name</label>
+                    <div class="card-body2">
+                        <label for="program_name">Program Name</label>
+                        <div class="form-group"  style="padding-left: 100px;">
                             <input class="form-control2" name="program_name" type="text" placeholder="Program Name"
-                                   maxlength="100">
+                                   maxlength="100" style="border: 1px solid #77cd28;">
                         </div>
-                        <div class="form-group">
-                            <label for="desc">Description</label>
-                            <textarea class="form-control-desc" name="desc" type="text" maxlength="1000"></textarea>
+                        <label for="desc">Description</label>
+                        <div class="form-group" style="padding-left: 100px;">
+                            <textarea class="form-control-desc" name="desc" type="text" maxlength="1000" style="border: 1px solid #77cd28;" placeholder="Description"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="year">Year</label>
+                        <label for="year">Year</label>
+                        <div class="form-group" style="padding-left: 100px;">
                             <input class="form-control2" name="year" type="number" placeholder="Year" min="0"
-                                   max="9999">
+                                   max="9999" style="border: 1px solid #77cd28; padding-left: 20px;">
+
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer" style="border: none;">
                         <button type="button" data-bs-dismiss="modal" class="close_button">Cancel</button>
                         <button type="submit" class="join_button">Create</button>
                     </div>
